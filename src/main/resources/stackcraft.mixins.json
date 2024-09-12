@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.iactu.stackcraft.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "modid.refmap.json",
+  "mixins": [
+    "ContainerMixin",
+    "DataComponentsMixin",
+    "ItemStackMixin"
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}
