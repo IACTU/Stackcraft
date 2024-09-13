@@ -1,10 +1,14 @@
 package com.iactu.stackcraft;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.component.DataComponents;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -27,6 +31,19 @@ public class StackcraftMod { // TODO: remove instances of Example Mod, examplemo
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+    }
+
+    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+    public static class CommonModEvents {
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public static void onModifyDefaultComponentsEvent(ModifyDefaultComponentsEvent event) {
+            event.getAllItems().filter(item -> item.getDefaultMaxStackSize() > 1)
+                    .forEach(item -> {
+                        int defaultMaxStackSize = item.getDefaultMaxStackSize();
+                        int newDefaultMaxStackSize = Math.max((defaultMaxStackSize * 1000) / 64, 1);    // TODO: make this configurable, also what about issues with multiplication?
+                        event.modify(item, (builder -> builder.set(DataComponents.MAX_STACK_SIZE, newDefaultMaxStackSize)));
+                    });
+        }
     }
 }
 
