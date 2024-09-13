@@ -10,6 +10,7 @@
     "ItemStackMixin"
   ],
   "client": [
+    "GuiGraphicsMixin"
   ],
   "minVersion": "0.8"
 }
