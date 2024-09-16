@@ -8,6 +8,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import org.slf4j.Logger;
 
@@ -30,7 +31,7 @@ public class StackcraftMod { // TODO: remove instances of Example Mod, examplemo
         //NeoForge.EVENT_BUS.register(this);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -39,8 +40,13 @@ public class StackcraftMod { // TODO: remove instances of Example Mod, examplemo
         public static void onModifyDefaultComponentsEvent(ModifyDefaultComponentsEvent event) {
             event.getAllItems().filter(item -> item.getDefaultMaxStackSize() > 1)
                     .forEach(item -> {
-                        int defaultMaxStackSize = item.getDefaultMaxStackSize();
-                        int newDefaultMaxStackSize = Math.max((defaultMaxStackSize * 1000) / 64, 1);    // TODO: make this configurable, also what about issues with multiplication?
+                        int newDefaultMaxStackSize;
+                        if (Config.respectSmallStackSizes) {
+                            newDefaultMaxStackSize = Math.max((item.getDefaultMaxStackSize() * Config.defaultStackSize) / 64, 1);
+                        } else {
+                            newDefaultMaxStackSize = Config.defaultStackSize;
+                        }
+
                         event.modify(item, (builder -> builder.set(DataComponents.MAX_STACK_SIZE, newDefaultMaxStackSize)));
                     });
         }
