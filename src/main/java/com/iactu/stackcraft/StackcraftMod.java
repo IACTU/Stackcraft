@@ -21,10 +21,11 @@ public class StackcraftMod { // TODO: remove instances of Example Mod, examplemo
     // Directly reference a slf4j logger
     private static final Logger LOGGER = LogUtils.getLogger();
 
+    public static final int ABSOLUTE_MAXIMUM_STACK_SIZE = Integer.MAX_VALUE / 2;
+
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public StackcraftMod(IEventBus modEventBus, ModContainer modContainer) {
-    // TODO: add visual change to show stack size as somethign like 1K
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (StackcraftMod) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -42,7 +43,11 @@ public class StackcraftMod { // TODO: remove instances of Example Mod, examplemo
                     .forEach(item -> {
                         int newDefaultMaxStackSize;
                         if (Config.respectSmallStackSizes) {
-                            newDefaultMaxStackSize = Math.max((item.getDefaultMaxStackSize() * Config.defaultStackSize) / 64, 1);
+                            newDefaultMaxStackSize = Math.clamp(
+                                    (((long) item.getDefaultMaxStackSize()) * Config.defaultStackSize) / 64,
+                                    1,
+                                    ABSOLUTE_MAXIMUM_STACK_SIZE
+                            );
                         } else {
                             newDefaultMaxStackSize = Config.defaultStackSize;
                         }

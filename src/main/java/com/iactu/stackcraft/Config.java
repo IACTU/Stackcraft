@@ -11,7 +11,7 @@ public class Config {
 
     private static final ModConfigSpec.IntValue DEFAULT_STACK_SIZE = BUILDER
             .comment("The new default stack size for items. Vanilla default stack size is 64. Default is 1000.")
-            .defineInRange("defaultStackSize", 1000, 1, Integer.MAX_VALUE);
+            .defineInRange("defaultStackSize", 1000, 1, StackcraftMod.ABSOLUTE_MAXIMUM_STACK_SIZE);
 
     private static final ModConfigSpec.BooleanValue RESPECT_SMALL_STACK_SIZES = BUILDER
             .comment("Whether items with small stack sizes (ex: ender pearls) have a new stack size proportional to the new default stack size value. Setting this value to false will cause all items to have the same stack size. Default is true.")

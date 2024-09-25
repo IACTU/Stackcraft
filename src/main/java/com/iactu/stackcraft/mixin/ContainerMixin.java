@@ -1,5 +1,6 @@
 package com.iactu.stackcraft.mixin;
 
+import com.iactu.stackcraft.StackcraftMod;
 import net.minecraft.world.Container;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -12,6 +13,6 @@ public interface ContainerMixin {
      */
     @Overwrite
     default int getMaxStackSize() {
-        return Integer.MAX_VALUE;
+        return StackcraftMod.ABSOLUTE_MAXIMUM_STACK_SIZE;
     }
 }
