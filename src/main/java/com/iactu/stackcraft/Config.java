@@ -17,15 +17,22 @@ public class Config {
             .comment("Whether items with small stack sizes (ex: ender pearls) have a new stack size proportional to the new default stack size value. Setting this value to false will cause all items to have the same stack size. Default is true.")
             .define("respectSmallStackSizes", true);
 
+    private static final ModConfigSpec.IntValue MINIMUM_DEFAULT_STACK_SIZE_THRESHOLD = BUILDER
+            .comment("The minimum default stack size for any stack size adjustment to occur (ex: if this is set to 17 then ender pearls will keep their usual maximum stack size of 16).")
+            .defineInRange("minimumDefaultStackSizeThreshold", 1, 0, Integer.MAX_VALUE);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int defaultStackSize;
 
     public static boolean respectSmallStackSizes;
 
+    public static int minimumDefaultStackSizeThreshold;
+
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         defaultStackSize = DEFAULT_STACK_SIZE.get();
         respectSmallStackSizes = RESPECT_SMALL_STACK_SIZES.get();
+        minimumDefaultStackSizeThreshold = MINIMUM_DEFAULT_STACK_SIZE_THRESHOLD.get();
     }
 }

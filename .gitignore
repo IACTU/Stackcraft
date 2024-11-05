@@ -25,4 +25,4 @@ run-data
 
 repo
 /src/generated/resources/.cache/
-/java_pid18880.hprof
+*.hprof

@@ -39,7 +39,11 @@ public class StackcraftMod { // TODO: remove instances of Example Mod, examplemo
     public static class CommonModEvents {
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void onModifyDefaultComponentsEvent(ModifyDefaultComponentsEvent event) {
-            event.getAllItems().filter(item -> item.getDefaultMaxStackSize() > 1)
+            event.getAllItems().filter(item ->
+                                    !item.components().has(DataComponents.DAMAGE)
+                                            && !item.components().has(DataComponents.MAX_DAMAGE)
+                                            && item.getDefaultMaxStackSize() > Config.minimumDefaultStackSizeThreshold
+                    )
                     .forEach(item -> {
                         int newDefaultMaxStackSize;
                         if (Config.respectSmallStackSizes) {
