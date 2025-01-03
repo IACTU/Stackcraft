@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin implements DataComponentHolder, net.neoforged.neoforge.common.extensions.IItemStackExtension, net.neoforged.neoforge.common.MutableDataComponentHolder {
     @ModifyArg(
-            method = "lambda$static$3",
+            method = "lambda$static$1",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/util/ExtraCodecs;intRange(II)Lcom/mojang/serialization/Codec;"
