@@ -10,5 +10,5 @@ import org.spongepowered.asm.mixin.Shadow;
 @Mixin(Item.class)
 public abstract class ItemMixin implements FeatureElement, ItemLike, net.neoforged.neoforge.common.extensions.IItemExtension {
     @Shadow
-    public static final int ABSOLUTE_MAX_STACK_SIZE = StackcraftMod.ABSOLUTE_MAXIMUM_STACK_SIZE;    // TODO: not working maybe!
+    public static final int ABSOLUTE_MAX_STACK_SIZE = StackcraftMod.ABSOLUTE_MAXIMUM_STACK_SIZE;
 }

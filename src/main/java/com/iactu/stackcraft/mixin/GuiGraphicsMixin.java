@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin implements net.neoforged.neoforge.client.extensions.IGuiGraphicsExtension {
     @ModifyVariable(
-            method = "renderItemDecorations(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
+            method = "renderItemCount(Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V",
             at = @At("STORE"),
             name = {"s"}
     )
