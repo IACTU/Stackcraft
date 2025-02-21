@@ -4,9 +4,10 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "modid.refmap.json",
   "mixins": [
+    "ComponentItemHandlerMixin",
     "ContainerMixin",
     "DataComponentsMixin",
-    "ItemMixin",
+    "ItemStackHandlerMixin",
     "ItemStackMixin"
   ],
   "client": [
