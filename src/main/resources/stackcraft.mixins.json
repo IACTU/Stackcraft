@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "modid.refmap.json",
   "mixins": [
+    "BundleItemMixin",
     "ComponentItemHandlerMixin",
     "ContainerMixin",
     "DataComponentsMixin",
