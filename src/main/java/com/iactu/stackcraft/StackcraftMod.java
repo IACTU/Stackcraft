@@ -24,7 +24,7 @@ public class StackcraftMod {
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
+    @EventBusSubscriber(modid = MOD_ID)
     public static class CommonModEvents {
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public static void onModifyDefaultComponentsEvent(ModifyDefaultComponentsEvent event) {
