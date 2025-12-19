@@ -8,7 +8,7 @@
     "ContainerMixin",
     "DataComponentsMixin",
     "ItemEntityMixin",
-    "ItemStackHandlerMixin",
+    "ItemStacksResourceHandlerMixin",
     "ItemStackMixin"
   ],
   "client": [
